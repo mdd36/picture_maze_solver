@@ -43,4 +43,16 @@ list<GraphEdge> GraphNode::getEdges() {
     return ret;
 }
 
+void GraphNode::addEdge(GraphEdge* e){
+    neighbors.push_back(*e);
+}
+
+int GraphNode::getRow(){
+    return y;
+}
+
+int GraphNode::getCol(){
+    return x;
+}
+
 #include "GraphNode.h"

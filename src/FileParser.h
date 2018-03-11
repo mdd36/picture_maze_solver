@@ -15,7 +15,8 @@ public:
 
 private:
     static vector<vector<int>> parse(char* fName);
-    static void place(int x, int y);
+    static void place(int x, int y, GraphNode* lastInRow, GraphNode* lastInCol);
+    set<GraphNode> nodes;
 };
 
 
