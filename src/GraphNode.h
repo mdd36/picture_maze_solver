@@ -23,7 +23,8 @@ public:
     list<GraphEdge> getEdges();
     void setColor(int newColor);
     int getColor();
-    bool wasSeen();
+    int wasSeen();
+    void visit(int state);
     void addEdge(GraphEdge* e);
     int getRow();
     int getCol();
@@ -34,7 +35,7 @@ private:
     int color;
     int x;
     int y;
-    bool seen;
+    int state;
 };
 
 

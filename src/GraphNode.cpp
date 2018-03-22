@@ -16,7 +16,7 @@ void GraphNode::init(int x, int y, int color) {
     this->x = x;
     this->y = y;
     this->color = color;
-    seen = false;
+    state = 0;
 }
 
 void GraphNode::setEdges(list<GraphEdge>* connections) {
@@ -27,8 +27,12 @@ int GraphNode::getColor() {
     return color;
 }
 
-bool GraphNode::wasSeen() {
-    return seen;
+int GraphNode::wasSeen() {
+    return state;
+}
+
+void GraphNode::visit(int state){
+    this->state = state;
 }
 
 void GraphNode::setColor(int newColor) {
