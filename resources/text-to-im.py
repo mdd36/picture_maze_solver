@@ -1,9 +1,9 @@
 from PIL import Image
 from sys import argv
 
-colors = {'0': (0, 0, 0), '1': (255, 255, 255), '2': (255, 0, 0), '3': (0, 255, 0), '4': (0, 255, 255)}
+colors = {'0':(255,255,255), '1':(0,0,0), '2':(255,0,0), '3':(0,255,0), '4':(0,255,255)}
 
-with open('./../data/modified.txt', 'r') as file:
+with open('./../data/simple.txt', 'r') as file:
 #with open('./../out/' + argv[1] + '.txt', 'r') as file:
     raw = file.readlines()
 

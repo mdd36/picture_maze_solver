@@ -10,4 +10,5 @@ find_package( PythonInterp 3.6 REQUIRED )
 set(PYTHON_LIBRARY C:\\Users\\matth\\AppData\\Local\\Programs\\Python\\Python36\\libs\\python36.lib)
 find_package(PythonLibs 3.6 REQUIRED)
 include_directories ( ${PYTHON_INCLUDE_DIRS} )
+
 add_executable(picture_maze_solver ${SOURCE_FILES})
