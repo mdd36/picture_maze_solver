@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include <dlfcn.h>
+#include <tuple>
 #include "FileParser.h"
 
 using namespace std;
@@ -18,8 +19,8 @@ int main() {
     cout << "BEGINNING MAZE SOLVING" << endl;
 
     //CODE HERE TO SOLVE THE MAZE
-    auto parser = *(new FileParser());
-    parser.createGraph("./../data/simple.txt");
+    auto parser = new FileParser();
+    auto headAndTail = parser->createGraph("./../data/simple.txt");
 
 //    cout << "GENERATING IMAGE OUTPUT" << endl;
 //

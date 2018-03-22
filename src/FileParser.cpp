@@ -5,18 +5,21 @@
 #include <fstream>
 #include <vector>
 #include <iostream>
+#include <tuple>
 #include "FileParser.h"
 
-GraphNode* FileParser::createGraph(char* fName) {
+tuple<GraphNode*, GraphNode*> FileParser::createGraph(char* fName) {
     vector<vector<int>> raw = parse(fName);
-    vector<vector<int>> ret;
+    vector<vector<int>> out;
+    GraphNode* head = nullptr;
+    GraphNode* tail = nullptr;
     GraphNode* lastInRow = nullptr;
     auto* lastInCol = (GraphNode**) malloc(raw[0].size() * sizeof(GraphNode*));
     for(int i = 0; i < raw.size(); i++){
-        ret.push_back(*(new vector<int>));
+        out.push_back(*(new vector<int>));
         cout << i << endl;
         for(int j = 0; j < raw[0].size(); j++){
-            ret[i].push_back(raw[i][j]);
+            out[i].push_back(raw[i][j]);
             if(raw[i][j] == 0){
                 lastInRow = nullptr;
                 lastInCol[j] = nullptr;
@@ -30,27 +33,23 @@ GraphNode* FileParser::createGraph(char* fName) {
 
 
             if((left ^ right) || (top ^ bottom) || (top && bottom && left && right)){
-                place(j,i, lastInRow, lastInCol[j]);
-                //cout << "hello there!" << endl;
-                cout << "top ^ bottom is " << (top ^ bottom) << endl;
-                cout << "right ^ left is " << (left ^ right) << endl;
-                cout << "is four way is " << (top && bottom && left && right) << endl;
-                ret[i][j] = 2;
+                GraphNode* temp = place(j,i, lastInRow, lastInCol[j]);
+                if(!head) head = temp;
+                tail = temp;
+                out[i][j] = 2;
             }
         }
         //Not needed since all mazes are bounded in walls, so it gets reset anyway
         //lastInRow = nullptr;
     }
-    free(lastInCol);
-    free(lastInRow);
 
     ofstream outfile("./../data/modified.txt");
-    for(auto row : ret) {
+    for(auto row : out) {
         for (int val : row)
             outfile << val;
         outfile << endl;
     }
-
+    return make_tuple(head, tail);
 }
 
 vector<vector<int>> FileParser::parse(char *fName) {
@@ -69,7 +68,7 @@ vector<vector<int>> FileParser::parse(char *fName) {
     return raw;
 }
 
-void FileParser::place(int x, int y, GraphNode* lastInRow, GraphNode* lastInCol){
+GraphNode* FileParser::place(int x, int y, GraphNode* lastInRow, GraphNode* lastInCol){
     auto* n1 = new GraphNode(x,y);
     if(lastInRow){
         int weight = lastInRow->getCol() - n1->getCol();
@@ -85,4 +84,5 @@ void FileParser::place(int x, int y, GraphNode* lastInRow, GraphNode* lastInCol)
         lastInCol->addEdge(e);
         lastInCol = n1;
     }
+    return n1;
 }

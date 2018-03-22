@@ -12,11 +12,11 @@
 class FileParser {
 
 public:
-    GraphNode* createGraph(char* fName);
+    tuple<GraphNode*, GraphNode*> createGraph(char* fName);
 
 private:
     vector<vector<int>> parse(char* fName);
-    void place(int x, int y, GraphNode* lastInRow, GraphNode* lastInCol);
+    GraphNode* place(int x, int y, GraphNode* lastInRow, GraphNode* lastInCol);
 };
 
 
