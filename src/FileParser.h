@@ -6,16 +6,17 @@
 #define PICTURE_MAZE_SOLVER_FILEPARSER_H
 
 
+#include <vector>
 #include "GraphNode.h"
 
 class FileParser {
 
 public:
-    static GraphNode* createGraph(char* fName);
+    tuple<GraphNode*, GraphNode*> createGraph(char* fName);
 
 private:
-    static vector<vector<int>> parse(char* fName);
-    static void place(int x, int y);
+    vector<vector<int>> parse(char* fName);
+    GraphNode* place(int x, int y, GraphNode* lastInRow, GraphNode* lastInCol);
 };
 
 

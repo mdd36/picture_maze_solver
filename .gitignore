@@ -1,0 +1,4 @@
+data/*.txt
+lib/*
+.idea/*
+cmake-build-debug

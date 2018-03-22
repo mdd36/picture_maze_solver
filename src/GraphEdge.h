@@ -15,6 +15,8 @@ class GraphEdge {
 
 public:
     GraphEdge(GraphNode* nodes, int weight);
+    GraphEdge(GraphNode* n1, GraphNode* n2, int wieght);
+    ~GraphEdge();
     int getWeight();
     GraphNode* getNodes();
 

@@ -7,6 +7,7 @@
 
 #include <list>
 #include <iterator>
+#include <set>
 #include "GraphEdge.h"
 
 using namespace std;
@@ -23,6 +24,9 @@ public:
     void setColor(int newColor);
     int getColor();
     bool wasSeen();
+    void addEdge(GraphEdge* e);
+    int getRow();
+    int getCol();
 
 private:
     void init(int x, int y, int color);

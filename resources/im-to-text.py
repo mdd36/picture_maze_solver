@@ -1,8 +1,8 @@
 from PIL import Image
 from sys import argv
 
-im = Image.open('./../data/' + argv[1] + '.png')
-# im = Image.open("./../data/simple.png")
+# im = Image.open('./../data/' + argv[1] + '.png')
+im = Image.open("./../data/simple.png")
 
 pix = im.load()
 width, height = im.size
@@ -17,6 +17,6 @@ for y in range(height):
 
 out = ''.join(raw)
 
-# with open(".\\..\\data\\simple.txt", "w+") as file:
-with open('.\\..\\data\\' + argv[1] + '.txt', 'w+') as file:
+with open(".\\..\\data\\simple.txt", "w+") as file:
+# with open('.\\..\\data\\' + argv[1] + '.txt', 'w+') as file:
     file.write(out)

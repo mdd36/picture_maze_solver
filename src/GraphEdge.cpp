@@ -10,15 +10,24 @@ GraphEdge::GraphEdge(GraphNode *nodes, int weight) {
     this->weight = weight;
 }
 
+GraphEdge::GraphEdge(GraphNode* n1, GraphNode* n2, int weight) {
+    this->nodes = (GraphNode*) malloc(2 * sizeof(GraphNode));
+    *nodes = *n1;
+    *(nodes + 1) = *n2;
+    this->weight = weight;
+}
+
 int GraphEdge::getWeight() {
     return weight;
 }
 
 GraphNode* GraphEdge::getNodes() {
     auto* ret = (GraphNode*) malloc(2 * sizeof(GraphNode));
-    ret[0] = nodes[0];
-    ret[1] = nodes[1];
+    *ret = *nodes;
+    *(ret + 1) = *(nodes + 1);
     return ret;
 }
 
-
+GraphEdge::~GraphEdge() {
+    free(nodes);
+}
