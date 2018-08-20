@@ -15,6 +15,9 @@ typedef unsigned char unchar;
 
 const static std::string BW[] = {"(0,0,0)", "(255,255,255)"};
 
+void FileHandler::writeGridToFile(std::vector<std::vector<int>> *grid, const std::string &fname) {
+
+}
 
 std::vector<std::vector<int>> FileHandler::readFileToGrid(const std::string &fname) {
     std::fstream file(fname);

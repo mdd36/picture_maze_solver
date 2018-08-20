@@ -2,7 +2,6 @@
 #include <tuple>
 #include "FileHandler.h"
 #include "DFS.cpp"
-#include "ImWriter.cpp"
 
 using namespace std;
 
@@ -21,8 +20,6 @@ int main() {
             cout << i << " ";
         cout << endl;
     }
-    //ImWriter* imWriter = new ImWriter();
-    //imWriter->write()
 
     cout << "DONE" << endl;
     return 0;

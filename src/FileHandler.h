@@ -15,6 +15,7 @@ class FileHandler {
 public:
     std::vector<std::vector<int>> readFileToGrid(const std::string &fname);
     std::tuple<GraphNode*, GraphNode*> createGraph(std::vector<std::vector<int>>* grid);
+    void writeGridToFile(std::vector<std::vector<int>>* grid, const std::string &fname);
 
 private:
     GraphNode* place(int x, int y, GraphNode** lastInRow, GraphNode** lastInCol);
