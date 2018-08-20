@@ -1,32 +1,22 @@
 #include <iostream>
-
-#include <dlfcn.h>
 #include <tuple>
 #include "FileParser.h"
+#include "DFS.cpp"
+#include "ImWriter.cpp"
 
 using namespace std;
 
 int main() {
-//    dlopen("libpython3.6.so.1.0", RTLD_NOW | RTLD_NOLOAD | RTLD_GLOBAL);
-//    cout << "LOADING IMAGE" << endl;
-//
-//    //Use python to parse the image
-//    string dataSource = "simple";
-//    string command = R"(python ./../resources/im-to-text.py )";
-//    command += dataSource;
-//    system(command.c_str());
+
 
     cout << "BEGINNING MAZE SOLVING" << endl;
 
-    //CODE HERE TO SOLVE THE MAZE
     auto parser = new FileParser();
     auto headAndTail = parser->createGraph("./../data/simple.txt");
-
-//    cout << "GENERATING IMAGE OUTPUT" << endl;
-//
-//    command = R"(python ./../resources/text-to-im.py )";
-//    command += dataSource;
-//    system(command.c_str());
+    Solver* solver = new DFS();
+    solver->solve(get<0>(headAndTail), get<1>(headAndTail));
+    ImWriter* imWriter = new ImWriter();
+    //imWriter->write()
 
     cout << "DONE" << endl;
     return 0;
