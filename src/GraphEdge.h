@@ -7,22 +7,17 @@
 
 #include <list>
 #include <iterator>
-#include "GraphNode.h"
 
-class GraphNode;
 
 class GraphEdge {
 
 public:
-    GraphEdge(GraphNode* nodes, int weight);
-    GraphEdge(GraphNode* n1, GraphNode* n2, int wieght);
-    ~GraphEdge();
+    GraphEdge();
+    explicit GraphEdge(int weight);
     int getWeight();
-    GraphNode* getNodes();
 
 private:
     int weight;
-    GraphNode* nodes;
 };
 
 

@@ -9,14 +9,18 @@
 #include <vector>
 #include "GraphNode.h"
 
+typedef unsigned char unchar;
+using namespace std;
 class FileParser {
 
 public:
-    tuple<GraphNode*, GraphNode*> createGraph(char* fName);
+    tuple<GraphNode*, GraphNode*, vector<vector<string>>> createGraph(char* fName);
+    void write(vector<vector<tuple<unchar, unchar, unchar>>> data);
 
 private:
-    vector<vector<int>> parse(char* fName);
+    tuple<vector<vector<int>>, vector<vector<string>>> parse(char* fName);
     GraphNode* place(int x, int y, GraphNode* lastInRow, GraphNode* lastInCol);
+    std::string join(std::vector<tuple<unchar, unchar, unchar>> v, const std::string &delim);
 };
 
 

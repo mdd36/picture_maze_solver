@@ -2,6 +2,7 @@
 // Created by Matthew on 3/10/2018.
 //
 
+#include <iostream>
 #include "GraphNode.h"
 
 GraphNode::GraphNode(int x, int y, int color){
@@ -9,54 +10,37 @@ GraphNode::GraphNode(int x, int y, int color){
 }
 
 GraphNode::GraphNode(int x, int y) {
-    init(x,y,1);
+    init(x,y,WHITE);
 }
 
 void GraphNode::init(int x, int y, int color) {
     this->x = x;
     this->y = y;
     this->color = color;
-    state = 0;
-}
-
-void GraphNode::setEdges(list<GraphEdge>* connections) {
-    neighbors = *connections;
+    this->neighbors = *(new std::unordered_map<GraphNode*, GraphEdge>());
 }
 
 int GraphNode::getColor() {
     return color;
 }
 
-int GraphNode::wasSeen() {
-    return state;
+void GraphNode::visit(int newColor){
+    this->color = newColor;
 }
 
-void GraphNode::visit(int state){
-    this->state = state;
+GraphEdge GraphNode::getEdgeWith(GraphNode* other) {
+    return neighbors[other];
 }
 
-void GraphNode::setColor(int newColor) {
-    color = newColor;
-}
-
-list<GraphEdge> GraphNode::getEdges() {
-    list<GraphEdge> ret;
-    for(GraphEdge e : neighbors){
-        ret.push_back(*(new GraphEdge(e.getNodes(), e.getWeight())));
+void GraphNode::addEdge(GraphNode* n, GraphEdge e){
+    //neighbors.insert(std::make_pair(n, e));
+    for (auto &neighbor : neighbors) {
+        std::cout << "x" << neighbor.first->getCol() << " => " << neighbor.second.getWeight() << std::endl;
     }
-    return ret;
+    neighbors[n] = e;
 }
 
-void GraphNode::addEdge(GraphEdge* e){
-    neighbors.push_back(*e);
-}
 
-int GraphNode::getRow(){
-    return y;
-}
 
-int GraphNode::getCol(){
-    return x;
-}
 
-#include "GraphNode.h"
+
