@@ -8,11 +8,11 @@
 
 class Solver{
 public:
-    virtual void solve(GraphNode* head, GraphNode* tail, int*** grid)= 0;
+    virtual void solve(GraphNode* head, GraphNode* tail, std::vector<std::vector<int>>* grid)= 0;
     static const int RED = 3;
 
 protected:
-    void colorGrid(GraphNode* gn1, GraphNode* gn2, int*** grid){
+    void colorGrid(GraphNode* gn1, GraphNode* gn2, std::vector<std::vector<int>>* grid){
         int x1 = gn1->getCol();
         int y1 = gn1->getRow();
         int x2 = gn2->getCol();
@@ -25,13 +25,14 @@ protected:
     }
 
 private:
-    void paintLine(int **const *grid, int xMin, int yMin, int xMax, int yMax) const {
+    void paintLine(std::vector<std::vector<int>>* grid, int xMin, int yMin, int xMax, int yMax) const {
+        if(xMin != xMax && yMin != yMax) throw new std::invalid_argument("One dimension must agree -- trying to paint diagonal");
         while(xMin < xMax){
-            *grid[xMin][yMin] = RED;
+            (*grid)[yMin][xMin] = RED;
             ++xMin;
         }
         while(yMin < yMax){
-            *grid[xMin][yMin] = RED;
+            (*grid)[yMin][xMin] = RED;
             ++yMin;
         }
     };

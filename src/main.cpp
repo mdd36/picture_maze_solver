@@ -1,6 +1,6 @@
 #include <iostream>
 #include <tuple>
-#include "FileParser.h"
+#include "FileHandler.h"
 #include "DFS.cpp"
 #include "ImWriter.cpp"
 
@@ -11,10 +11,16 @@ int main() {
 
     cout << "BEGINNING MAZE SOLVING" << endl;
 
-    auto parser = new FileParser();
-    auto headAndTail = parser->createGraph("./../data/simple.txt");
+    FileHandler parser;
+    auto grid = parser.readFileToGrid("./../data/simple.txt");
+    auto headAndTail = parser.createGraph(&grid);
     Solver* solver = new DFS();
     solver->solve(get<0>(headAndTail), get<1>(headAndTail), &grid);
+    for(std::vector<int> row: grid) {
+        for (int i : row)
+            cout << i << " ";
+        cout << endl;
+    }
     //ImWriter* imWriter = new ImWriter();
     //imWriter->write()
 
