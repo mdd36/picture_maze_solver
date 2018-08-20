@@ -33,10 +33,6 @@ GraphEdge GraphNode::getEdgeWith(GraphNode* other) {
 }
 
 void GraphNode::addEdge(GraphNode* n, GraphEdge e){
-    //neighbors.insert(std::make_pair(n, e));
-    for (auto &neighbor : neighbors) {
-        std::cout << "x" << neighbor.first->getCol() << " => " << neighbor.second.getWeight() << std::endl;
-    }
     neighbors[n] = e;
 }
 

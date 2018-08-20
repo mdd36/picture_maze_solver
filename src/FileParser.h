@@ -19,7 +19,7 @@ public:
 
 private:
     tuple<vector<vector<int>>, vector<vector<string>>> parse(char* fName);
-    GraphNode* place(int x, int y, GraphNode* lastInRow, GraphNode* lastInCol);
+    GraphNode* place(int x, int y, GraphNode** lastInRow, GraphNode** lastInCol);
     std::string join(std::vector<tuple<unchar, unchar, unchar>> v, const std::string &delim);
 };
 

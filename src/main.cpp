@@ -14,8 +14,8 @@ int main() {
     auto parser = new FileParser();
     auto headAndTail = parser->createGraph("./../data/simple.txt");
     Solver* solver = new DFS();
-    solver->solve(get<0>(headAndTail), get<1>(headAndTail));
-    ImWriter* imWriter = new ImWriter();
+    solver->solve(get<0>(headAndTail), get<1>(headAndTail), &grid);
+    //ImWriter* imWriter = new ImWriter();
     //imWriter->write()
 
     cout << "DONE" << endl;
