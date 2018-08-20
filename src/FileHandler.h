@@ -19,7 +19,7 @@ public:
 
 private:
     GraphNode* place(int x, int y, GraphNode** lastInRow, GraphNode** lastInCol);
-    std::string join(std::vector<std::tuple<unchar, unchar, unchar>> v, const std::string &delim);
+    std::string join(std::vector<int> v, const std::string &delim);
 };
 
 

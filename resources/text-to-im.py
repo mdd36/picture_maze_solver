@@ -1,21 +1,17 @@
 from PIL import Image
 from sys import argv
 
-# colors = {'0':(255,255,255), '1':(0,0,0), '2':(255,0,0), '3':(0,255,0), '4':(0,255,255)}
+colors = [(0,0,0), (255,255,255), (255,0,0)]
 
-with open('./../data/simple.txt', 'r') as file:
-#with open('./../out/' + argv[1] + '.txt', 'r') as file:
+with open('./../output/simple_dfs.txt', 'r') as file:
+# with open('./../output/' + argv[1] + '.txt', 'r') as file:
     raw = file.readlines()
 
 parsed = list()
 for line in raw:
     line = line[:-1]
     row = line.split(",")
-    temp = list()
-    for pixel in row:
-        pixel = pixel[1:-1]
-        r, g, b = pixel.split(",")
-        temp.append((r, g, b))
+    temp = [colors[int(pixel)] for pixel in row]
     parsed.append(temp)
 
 width = len(parsed[0])
