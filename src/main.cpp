@@ -14,8 +14,11 @@ int main() {
     auto parser = new FileParser();
     auto headAndTail = parser->createGraph("./../data/simple.txt");
     Solver* solver = new DFS();
-    solver->solve(get<0>(headAndTail), get<1>(headAndTail));
-    ImWriter* imWriter = new ImWriter();
+    std::vector<GraphNode*> path = solver->solve(get<0>(headAndTail), get<1>(headAndTail));
+    for(GraphNode* g : path){
+        cout << "(" << g->getCol() << ", " << g->getRow() << ")" << endl;
+    }
+    //ImWriter* imWriter = new ImWriter();
     //imWriter->write()
 
     cout << "DONE" << endl;

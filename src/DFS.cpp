@@ -10,8 +10,42 @@
 
 class DFS : public Solver{
 public:
-    void solve(GraphNode* head, GraphNode*) override {
+    std::vector<GraphNode*> solve(GraphNode* head, GraphNode* tail) override {
         cout << "Solving with DFS..." << endl;
+        std::stack<GraphNode*> s;
+        std::vector<GraphNode*> ret;
+        s.push(head);
+        while(!s.empty()){
+            GraphNode* gn = s.top();
+            ret.emplace_back(gn);
+            s.pop();
+            if(gn == tail)
+                return ret;
+            gn->visit(GraphNode::BLACK);
+            pushNeighbors(gn, &s);
+        }
+        throw std::invalid_argument("Graph has no path to tail node");
+    }
+
+private:
+    std::vector<GraphNode*> copyToVector(std::stack<GraphNode*>* stack, vector<GraphNode*>* ret){
+        std::list<GraphNode*> list;
+        while(!stack->empty()){
+            list.emplace_front(stack->top());
+            stack->pop();
+        }
+        for(GraphNode* g : list) ret->emplace_back(g);
+        return *ret;
+    }
+
+    void pushNeighbors(GraphNode* gn, stack<GraphNode*>* s){
+        for(std::pair<GraphNode*, GraphEdge> pair : gn->getNeighbors()){
+            GraphNode* neighbor = pair.first;
+            if(neighbor->getColor() == GraphNode::WHITE){
+                s->push(neighbor);
+                neighbor->visit(GraphNode::GRAY);
+            }
+        }
     }
 };
 

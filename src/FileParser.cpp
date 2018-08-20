@@ -31,10 +31,7 @@ tuple<GraphNode*, GraphNode*, vector<vector<string>>> FileParser::createGraph(ch
     GraphNode* head = nullptr;
     GraphNode* tail = nullptr;
     GraphNode* lastInRow = nullptr;
-    GraphNode** lastInCol = new GraphNode*[raw[0].size()];
-    for(int i = 0; i < raw[0].size(); ++i){
-        lastInCol[i] = nullptr; // Cause apparently C++ won't do this for you
-    }
+    GraphNode* lastInCol[raw[0].size()] ={nullptr};
     for(int i = 0; i < raw.size(); ++i){
         for(int j = 0; j < raw[0].size(); ++j){
             if(raw[i][j] == 0){ // If we found a wall
@@ -43,19 +40,17 @@ tuple<GraphNode*, GraphNode*, vector<vector<string>>> FileParser::createGraph(ch
                 continue;
             }
             // Check bounds. If OoB, treat it as a wall. May not be needed since all mazes are bounded by walls
-            int top = i+1 < raw.size() ? raw[i+1][j] : 0;
-            int bottom = i-1 < 0 ? 0 : raw[i-1][j];
+            int bottom = i+1 < raw.size() ? raw[i+1][j] : 0;
+            int top = i-1 < 0 ? 0 : raw[i-1][j];
             int left = j-1 < 0 ? 0 : raw[i][j-1];
             int right = j+1 < raw[0].size() ? raw[i][j+1] : 0;
-            // TODO check C++ int -> bool casting
             if((left != right) || (top != bottom) || (top && bottom && left && right)){ // At a junction
-                GraphNode* temp = place(j,i, lastInRow, lastInCol[j]);
+                GraphNode* temp = place(j,i, &lastInRow, &lastInCol[j]);
                 if(!head) head = temp;
                 tail = temp; // Since tail is the last non-wall we visit
             }
         }
     }
-    free(lastInCol);
     return make_tuple(head, tail, rgb);
 }
 
@@ -105,24 +100,22 @@ tuple<vector<vector<int>>, vector<vector<string>>> FileParser::parse(char *fName
  * @param lastInCol Last graph node seen in this col. If a wall was seen more recently than the last node, is nullptr
  * @return The created graph node
  */
-GraphNode* FileParser::place(int x, int y, GraphNode* lastInRow, GraphNode* lastInCol){
+GraphNode* FileParser::place(int x, int y, GraphNode** lastInRow, GraphNode** lastInCol){
     auto* n1 = new GraphNode(x,y);
-    cout << lastInCol << endl;
-    cout << lastInRow << endl;
-    if(lastInRow){
-        int weight = lastInRow->getCol() - n1->getCol();
+    if(*lastInRow){
+        int weight = (*lastInRow)->getCol() - n1->getCol();
         auto* e = new GraphEdge(weight);
-        n1->addEdge(lastInRow, *e);
-        lastInRow->addEdge(n1, *e);
+        n1->addEdge(*lastInRow, *e);
+        (*lastInRow)->addEdge(n1, *e);
     }
-    if(lastInCol){ //Can probably be refactored into its own subroutine
-        int weight = n1->getRow() - lastInCol->getRow();
+    if(*lastInCol){ //Can probably be refactored into its own subroutine
+        int weight = n1->getRow() - (*lastInCol)->getRow();
         auto* e = new GraphEdge(weight);
-        n1->addEdge(lastInCol, *e);
-        lastInCol->addEdge(n1, *e);
+        n1->addEdge(*lastInCol, *e);
+        (*lastInCol)->addEdge(n1, *e);
     }
-    lastInRow = n1;
-    lastInCol = n1;
+    *lastInRow = n1;
+    *lastInCol = n1;
     return n1;
 }
 

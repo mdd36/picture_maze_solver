@@ -28,6 +28,10 @@ public:
     unsigned long operator()(const GraphNode& k) const {
         return (229 * ((((std::hash<int>()(k.getCol()))) ^ (std::hash<int>()(k.getRow()))) << 1)) % 743;
     }
+    std::unordered_map<GraphNode*, GraphEdge> getNeighbors() const {
+        std::unordered_map<GraphNode*, GraphEdge> ret = neighbors;
+        return ret;
+    };
     static const int WHITE = 0;
     static const int GRAY = 1;
     static const int BLACK = 2;

@@ -8,5 +8,5 @@
 
 class Solver{
 public:
-    virtual void solve(GraphNode* head, GraphNode*)=0;
+    virtual std::vector<GraphNode*> solve(GraphNode* head, GraphNode* tail)= 0;
 };
