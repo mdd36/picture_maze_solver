@@ -10,8 +10,8 @@
 
 class DFS : public Solver{
 public:
-    void solve(GraphNode* head, GraphNode* tail, int*** grid) override {
-        cout << "Solving with DFS..." << endl;
+    void solve(GraphNode* head, GraphNode* tail, std::vector<std::vector<int>>* grid) override {
+        std::cout << "Solving with DFS..." << std::endl;
         std::stack<GraphNode*> s;
         s.push(head);
         while(!s.empty()){
@@ -33,7 +33,7 @@ protected:
 private:
     std::unordered_map<GraphNode*, std::list<GraphNode*>*> parents;
 
-    void pushNeighbors(GraphNode* gn, stack<GraphNode*>* s){
+    void pushNeighbors(GraphNode* gn, std::stack<GraphNode*>* s){
         for(std::pair<GraphNode*, GraphEdge> pair : gn->getNeighbors()){
             GraphNode* neighbor = pair.first;
             if(neighbor->getColor() == GraphNode::WHITE){
