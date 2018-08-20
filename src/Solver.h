@@ -26,12 +26,13 @@ protected:
 
 private:
     void paintLine(std::vector<std::vector<int>>* grid, int xMin, int yMin, int xMax, int yMax) const {
+        if(xMin != xMax && yMin != yMax) throw new std::invalid_argument("One dimension must agree -- trying to paint diagonal");
         while(xMin < xMax){
-            (*grid)[xMin][yMin] = RED;
+            (*grid)[yMin][xMin] = RED;
             ++xMin;
         }
         while(yMin < yMax){
-            (*grid)[xMin][yMin] = RED;
+            (*grid)[yMin][xMin] = RED;
             ++yMin;
         }
     };

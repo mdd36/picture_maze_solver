@@ -22,12 +22,12 @@ std::vector<std::vector<int>> FileHandler::readFileToGrid(const std::string &fna
     std::vector<std::vector<int>> raw;
     while(getline(file, line)){
         std::vector<int> row;
-        raw.push_back(row);
         for(int j  = 0; j < line.size() - 1; ++j){
             char ch = line[j];
             int pixel = ch - '0';
             row.push_back(pixel);
         }
+        raw.push_back(row); // Do this here since this action is by value, not reference
     }
     return raw;
 }

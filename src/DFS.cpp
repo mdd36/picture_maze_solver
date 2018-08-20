@@ -17,13 +17,15 @@ public:
         while(!s.empty()){
             GraphNode* gn = s.top();
             s.pop();
+            if(parents[gn] != nullptr)  // If we have parent, ie aren't head
+                for (auto it = parents[gn]->begin(); it != parents[gn]->end(); ++it)
+                    colorGrid(gn, *it, grid);
             if(gn == tail) {
+                (*grid)[tail->getRow()][tail->getCol()] = RED;
                 return;
             }
             gn->visit(GraphNode::BLACK);
             pushNeighbors(gn, &s);
-            for(GraphNode* parent : parents[gn])
-                colorGrid(gn, parent, grid);
         }
         throw std::invalid_argument("Graph has no path to tail node");
     }
@@ -39,9 +41,13 @@ private:
             if(neighbor->getColor() == GraphNode::WHITE){
                 s->push(neighbor);
                 neighbor->visit(GraphNode::GRAY);
-                if(parents.find(neighbor) == parents.end)
+                if(parents.find(neighbor) == parents.end())
                     parents[neighbor] = new std::list<GraphNode*>;
                 parents[neighbor]->emplace_back(gn);
+                auto l = parents[neighbor]->begin();
+                for(; l != parents[neighbor]->end(); ++l)
+                    std::cout<<*l<<std::endl;
+                std::cout << "";
             }
         }
     }
