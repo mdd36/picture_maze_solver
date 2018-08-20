@@ -28,16 +28,6 @@ public:
     }
 
 private:
-    std::vector<GraphNode*> copyToVector(std::stack<GraphNode*>* stack, vector<GraphNode*>* ret){
-        std::list<GraphNode*> list;
-        while(!stack->empty()){
-            list.emplace_front(stack->top());
-            stack->pop();
-        }
-        for(GraphNode* g : list) ret->emplace_back(g);
-        return *ret;
-    }
-
     void pushNeighbors(GraphNode* gn, stack<GraphNode*>* s){
         for(std::pair<GraphNode*, GraphEdge> pair : gn->getNeighbors()){
             GraphNode* neighbor = pair.first;
