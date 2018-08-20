@@ -10,9 +10,9 @@ int main() {
 
     cout << "BEGINNING MAZE SOLVING" << endl;
 
-    FileHandler parser;
-    auto grid = parser.readFileToGrid("./../data/simple.txt");
-    auto headAndTail = parser.createGraph(&grid);
+    FileHandler fileHandler;
+    auto grid = fileHandler.readFileToGrid("./../data/simple.txt");
+    auto headAndTail = fileHandler.createGraph(&grid);
     Solver* solver = new DFS();
     solver->solve(get<0>(headAndTail), get<1>(headAndTail), &grid);
     for(std::vector<int> row: grid) {
@@ -20,7 +20,7 @@ int main() {
             cout << i << " ";
         cout << endl;
     }
-
+    fileHandler.writeGridToFile(&grid, "./../output/simple_dfs.txt");
     cout << "DONE" << endl;
     return 0;
 }
