@@ -9,7 +9,7 @@
 class Solver{
 public:
     virtual void solve(GraphNode* head, GraphNode* tail, std::vector<std::vector<int>>* grid)= 0;
-    static const int RED = 3;
+    static const int RED = 2;
 
 protected:
     void colorGrid(GraphNode* gn1, GraphNode* gn2, std::vector<std::vector<int>>* grid){
