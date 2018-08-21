@@ -1,7 +1,7 @@
 from PIL import Image
 from sys import argv
 
-fname = argv[1] if len(argv > 1) else ""
+fname = argv[1] if len(argv) > 1 else "med"
 fPath = './../data/{}.png'.format(fname)
 im = Image.open(fPath)
 pix = im.load()

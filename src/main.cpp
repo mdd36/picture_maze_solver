@@ -5,7 +5,7 @@
 #include "solvers/DFS.cpp"
 
 int main(int argc, char** argv) {
-    std::string fname;
+    std::string fname = "med";
     if(fname.empty() && argc == 0) throw std::invalid_argument("No filename specified in code or through argument");
     std::cout << "BEGINNING MAZE SOLVING" << std::endl;
     FileHandler fileHandler;

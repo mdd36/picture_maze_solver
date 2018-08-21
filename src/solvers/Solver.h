@@ -5,6 +5,7 @@
 //using namespace std;
 
 #include "../graph/GraphNode.h"
+#include <vector>
 
 class Solver{
 public:
@@ -55,7 +56,8 @@ private:
      * @param yMax Target y
      */
     void paintLine(std::vector<std::vector<int>>* grid, int xMin, int yMin, int xMax, int yMax) const {
-        if(xMin != xMax && yMin != yMax) throw new std::invalid_argument("One dimension must agree -- trying to paint diagonal");
+        if(xMin != xMax && yMin != yMax) throw std::invalid_argument("One dimension must agree -- trying to paint diagonal");
+        (*grid)[yMin][xMin] = RED;
         while(xMin < xMax){
             (*grid)[yMin][xMin] = RED;
             ++xMin;
