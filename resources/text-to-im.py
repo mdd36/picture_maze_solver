@@ -1,9 +1,11 @@
 from PIL import Image
 from sys import argv
 
-colors = [(0,0,0), (255,255,255), (255,0,0)]
-with open('./../output/txt/simple_dfs.txt', 'r') as file:
-# with open('./../output/' + argv[1] + '.txt', 'r') as file:
+colors = [(0, 0, 0), (255, 255, 255), (255, 0, 0)]
+fname = argv[1] if len(argv > 1) else ""
+fPath = './../output/txt/{}.txt'.format(fname)
+
+with open(fPath, 'r') as file:
     raw = file.readlines()
 
 parsed = list()
@@ -20,6 +22,6 @@ im = Image.new('RGB', (width, height))
 pix = im.load()
 for y in range(height):
     for x in range(width):
-        pix[x,y] = parsed[y][x]
+        pix[x, y] = parsed[y][x]
 
-im.save('img1.png', 'PNG')
+im.save('./../output/im/{}.png'.format(fname), 'PNG')
