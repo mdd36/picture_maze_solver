@@ -20,6 +20,9 @@ public:
 private:
     GraphNode* place(int x, int y, GraphNode** lastInRow, GraphNode** lastInCol);
     std::string join(std::vector<int> v, const std::string &delim);
+    void addLine(const std::string &line, std::vector<std::vector<int>> &raw) const;
+    void placeAndSetNeighbors(const std::vector<std::vector<int>>* grid, GraphNode*& lastInRow,
+                              GraphNode** lastInCol, int i, int j, GraphNode *&head, GraphNode *&tail);
 };
 
 

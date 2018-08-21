@@ -34,15 +34,24 @@ std::vector<std::vector<int>> FileHandler::readFileToGrid(const std::string &fna
     std::string line;
     std::vector<std::vector<int>> raw;
     while(getline(file, line)){
-        std::vector<int> row;
-        for(int j  = 0; j < line.size() - 1; ++j){
+        addLine(line, raw);
+    }
+    return raw;
+}
+
+/**
+ * Read a line from the file into a vector of ints
+ * @param line Line to be read
+ * @param raw Vector of vectors for the grid
+ */
+void FileHandler::addLine(const std::string &line, std::vector<std::vector<int>> &raw) const {
+    std::vector<int> row;
+    for(int j  = 0; j < line.size() - 1; ++j){
             char ch = line[j];
             int pixel = ch - '0';
             row.push_back(pixel);
         }
-        raw.push_back(row); // Do this here since this action is by value, not reference
-    }
-    return raw;
+    raw.push_back(row); // Do this here since this action is by value, not reference
 }
 
 /**
@@ -63,19 +72,34 @@ std::tuple<GraphNode*, GraphNode*> FileHandler::createGraph(std::vector<std::vec
                 lastInCol[j] = nullptr;
                 continue;
             }
-            // Check bounds. If OoB, treat it as a wall. May not be needed since all mazes are bounded by walls
-            int bottom = i+1 < grid->size() ? (*grid)[i+1][j] : 0;
-            int top = i-1 < 0 ? 0 : (*grid)[i-1][j];
-            int left = j-1 < 0 ? 0 : (*grid)[i][j-1];
-            int right = j+1 < grid[0].size() ? (*grid)[i][j+1] : 0;
-            if((left != right) || (top != bottom) || (top && bottom && left && right)){ // At a junction
-                GraphNode* temp = place(j,i, &lastInRow, &lastInCol[j]);
-                if(!head) head = temp;
-                tail = temp; // Since tail is the last non-wall we visit
-            }
+            placeAndSetNeighbors(grid, lastInRow, lastInCol, i, j, head, tail);
         }
     }
     return std::make_tuple(head, tail);
+}
+
+/**
+ * Check if this location is a decision point, and place a GraphNode if it is.
+ * @param grid Grid of ints used to build the grid
+ * @param lastInRow Last GraphNode seen in this row
+ * @param lastInCol Array of GraphNode* to represent the last GraphNode seen in each column
+ * @param i Row index of potential node
+ * @param j Column index of potential node
+ * @param head First node placed in the graph representing the starting point
+ * @param tail Last node placed in the graph, representing the exit of the maze
+ */
+void FileHandler::placeAndSetNeighbors(const std::vector<std::vector<int>> *grid, GraphNode *&lastInRow,
+                                       GraphNode** lastInCol, int i, int j, GraphNode *&head, GraphNode *&tail) {
+    // Check bounds. If OoB, treat it as a wall. May not be needed since all mazes are bounded by walls
+    int bottom = i+1 < grid->size() ? (*grid)[i+1][j] : 0;
+    int top = i-1 < 0 ? 0 : (*grid)[i-1][j];
+    int left = j-1 < 0 ? 0 : (*grid)[i][j-1];
+    int right = j+1 < grid[0].size() ? (*grid)[i][j+1] : 0;
+    if((left != right) || (top != bottom) || (top && bottom && left && right)){ // At a junction
+        GraphNode* temp = place(j, i, &lastInRow, &lastInCol[j]);
+        if(!head) head = temp;
+        tail = temp; // Since tail is the last non-wall we visit
+    }
 }
 
 /**
