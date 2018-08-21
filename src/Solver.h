@@ -35,5 +35,6 @@ private:
             (*grid)[yMin][xMin] = RED;
             ++yMin;
         }
+        (*grid)[yMax][xMax] = RED;
     };
 };

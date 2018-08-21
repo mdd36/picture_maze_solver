@@ -13,7 +13,6 @@ typedef unsigned char unchar;
 #include <sstream>
 #include "FileHandler.h"
 
-const static std::string BW[] = {"(0,0,0)", "(255,255,255)"};
 
 void FileHandler::writeGridToFile(std::vector<std::vector<int>> *grid, const std::string &fname) {
     std::cout << "Writing solution to file..." << std::endl;
@@ -107,11 +106,10 @@ GraphNode* FileHandler::place(int x, int y, GraphNode** lastInRow, GraphNode** l
  * @param delim String to be inserted between each entry of v
  * @return A string containing all values of v seperated by delim
  */
-std::string FileHandler::join(std::vector<std::tuple<unchar, unchar, unchar>> v, const std::string &delim){
+std::string FileHandler::join(std::vector<int> v, const std::string &delim){
     std::stringstream ss;
     for(int i = 0; i < v.size(); ++i){
-        // TODO Convert tuples to strings
-        // ss << v[i];
+        ss << v[i];
         if(i != v.size()-1) ss << delim;
     }
     return ss.str();
