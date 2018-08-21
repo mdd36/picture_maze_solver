@@ -13,7 +13,6 @@ typedef unsigned char unchar;
 #include <sstream>
 #include "FileHandler.h"
 
-const static std::string BW[] = {"(0,0,0)", "(255,255,255)", "(255, 0, 0)"};
 
 void FileHandler::writeGridToFile(std::vector<std::vector<int>> *grid, const std::string &fname) {
     std::cout << "Writing solution to file..." << std::endl;
