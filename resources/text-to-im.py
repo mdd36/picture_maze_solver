@@ -2,8 +2,7 @@ from PIL import Image
 from sys import argv
 
 colors = [(0,0,0), (255,255,255), (255,0,0)]
-
-with open('./../output/simple_dfs.txt', 'r') as file:
+with open('./../output/txt/simple_dfs.txt', 'r') as file:
 # with open('./../output/' + argv[1] + '.txt', 'r') as file:
     raw = file.readlines()
 

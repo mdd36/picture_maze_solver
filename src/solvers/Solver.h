@@ -12,6 +12,20 @@ public:
     static const int RED = 2;
 
 protected:
+
+    std::unordered_map<GraphNode*, std::list<GraphNode*>*> parents;
+
+    /**
+     * Paint connections from this node to all its parents.
+     * @param grid Pointer to grid to paint on
+     * @param gn Pointer to the GraphNode to draw paths
+     */
+    void paint(std::vector<std::vector<int>>* grid, GraphNode* gn) {
+        if(parents[gn] != nullptr)  // If we have parent, ie aren't head
+            for (auto it = parents[gn]->begin(); it != parents[gn]->end(); ++it)
+                colorGrid(gn, *it, grid);
+    }
+
     /**
      * Paint the grid between two nodes
      * @param gn1 First node

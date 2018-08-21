@@ -10,7 +10,7 @@ int main() {
     auto headAndTail = fileHandler.createGraph(&grid);
     Solver* solver = new DFS();
     solver->solve(std::get<0>(headAndTail), std::get<1>(headAndTail), &grid);
-    fileHandler.writeGridToFile(&grid, "./../output/simple_dfs.txt");
+    fileHandler.writeGridToFile(&grid, "simple_dfs");
     std::cout << "DONE" << std::endl;
     return 0;
 }
