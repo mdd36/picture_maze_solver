@@ -1,26 +1,16 @@
 #include <iostream>
 #include <tuple>
-#include "FileHandler.h"
-#include "DFS.cpp"
-
-using namespace std;
+#include "io/FileHandler.h"
+#include "solvers/DFS.cpp"
 
 int main() {
-
-
-    cout << "BEGINNING MAZE SOLVING" << endl;
-
+    std::cout << "BEGINNING MAZE SOLVING" << std::endl;
     FileHandler fileHandler;
     auto grid = fileHandler.readFileToGrid("./../data/simple.txt");
     auto headAndTail = fileHandler.createGraph(&grid);
     Solver* solver = new DFS();
-    solver->solve(get<0>(headAndTail), get<1>(headAndTail), &grid);
-    for(std::vector<int> row: grid) {
-        for (int i : row)
-            cout << i << " ";
-        cout << endl;
-    }
+    solver->solve(std::get<0>(headAndTail), std::get<1>(headAndTail), &grid);
     fileHandler.writeGridToFile(&grid, "./../output/simple_dfs.txt");
-    cout << "DONE" << endl;
+    std::cout << "DONE" << std::endl;
     return 0;
 }

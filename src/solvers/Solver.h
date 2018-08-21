@@ -4,7 +4,7 @@
 
 //using namespace std;
 
-#include "GraphNode.h"
+#include "../graph/GraphNode.h"
 
 class Solver{
 public:
