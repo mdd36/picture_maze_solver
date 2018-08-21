@@ -30,7 +30,7 @@ void FileHandler::writeGridToFile(std::vector<std::vector<int>> *grid, const std
  * @return vector<vector<int>> for the grid, 0 for wall and 1 for open.
  */
 std::vector<std::vector<int>> FileHandler::readFileToGrid(const std::string &fname) {
-    std::fstream file(fname);
+    std::fstream file("./../input/" + fname + ".txt");
     std::string line;
     std::vector<std::vector<int>> raw;
     while(getline(file, line)){

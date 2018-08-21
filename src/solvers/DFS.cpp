@@ -27,6 +27,13 @@ public:
         throw std::invalid_argument("Graph has no path to tail node");
     }
 
+    /**
+     * @return String for the type of solver used
+     */
+    std::string getTypeString() override {
+        return "DFS";
+    }
+
     GraphNode* processTop(std::vector<std::vector<int>> *grid, std::stack<GraphNode *> *s) {
         GraphNode* gn = s->top();
         s->pop();
