@@ -10,6 +10,12 @@
 
 class DFS : public Solver{
 public:
+    /**
+     * Solve the maze by running DFS on the graph.
+     * @param head Starting node
+     * @param tail Target node
+     * @param grid Grid to color as the search occurs
+     */
     void solve(GraphNode* head, GraphNode* tail, std::vector<std::vector<int>>* grid) override {
         std::cout << "Solving with DFS..." << std::endl;
         std::stack<GraphNode*> s;
@@ -35,6 +41,11 @@ protected:
 private:
     std::unordered_map<GraphNode*, std::list<GraphNode*>*> parents;
 
+    /**
+     * Push all the neighbors of a graph node to the stack.
+     * @param gn GraphNode whose neighbors to push
+     * @param s Pointer to the stack to push the neighbors onto
+     */
     void pushNeighbors(GraphNode* gn, std::stack<GraphNode*>* s){
         for(std::pair<GraphNode*, GraphEdge> pair : gn->getNeighbors()){
             GraphNode* neighbor = pair.first;

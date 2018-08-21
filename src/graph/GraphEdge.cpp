@@ -3,16 +3,24 @@
 //
 
 #include "GraphEdge.h"
-#include <cmath>
 
+/**
+ * Default constructor for unordered_map
+ */
 GraphEdge::GraphEdge(){
     this->weight = -1;
 }
 
+/**
+ * @param weight starting weight of this edge
+ */
 GraphEdge::GraphEdge(int weight) {
     this->weight = weight;
 }
 
+/**
+ * @return weight of this edge
+ */
 int GraphEdge::getWeight() {
     return weight;
 }

@@ -2,9 +2,6 @@
 // Created by Matthew on 3/11/2018.
 //
 
-
-typedef unsigned char unchar;
-
 #include <fstream>
 #include <string>
 #include <vector>
@@ -13,16 +10,25 @@ typedef unsigned char unchar;
 #include <sstream>
 #include "FileHandler.h"
 
-
+/**
+ * Export the solution stored in a grid to a file.
+ * @param grid Solution determined by the solver
+ * @param fname Output file name, without extension. Path set to output/txt/fname
+ */
 void FileHandler::writeGridToFile(std::vector<std::vector<int>> *grid, const std::string &fname) {
     std::cout << "Writing solution to file..." << std::endl;
-    std::ofstream out (fname, std::ios::trunc);
+    std::ofstream out ("./../output/txt/" + fname + ".txt", std::ios::trunc);
     for(const std::vector<int> &row: *grid) {
         out << join(row, ",") << std::endl;
     }
     out.close();
 }
 
+/**
+ * Open and read the txt file of the maze into a grid of integers.
+ * @param fname Filename, without extension. Searches in data folder.
+ * @return vector<vector<int>> for the grid, 0 for wall and 1 for open.
+ */
 std::vector<std::vector<int>> FileHandler::readFileToGrid(const std::string &fname) {
     std::fstream file(fname);
     std::string line;
@@ -40,11 +46,10 @@ std::vector<std::vector<int>> FileHandler::readFileToGrid(const std::string &fna
 }
 
 /**
- * Build a graph represented by the file name. Nodes are placed only at 'decision points', or places where the maze
- * splits into multiple paths. Returns the head and tail of the graph for solving. Also builds the return data RGB
- * vector that will be written to a file as the solution.
- * @param fName Name of the file containing the maze.
- * @return The head and tail of the graph. Vector of RGB strings used when exporting the solution
+ * Build a graph represented by the grid. Nodes are placed only at 'decision points', or places where the maze
+ * splits into multiple paths. Returns the head and tail of the graph for solving.
+ * @param grid Pointer to the vector grid.
+ * @return The head and tail of the graph.
  */
 std::tuple<GraphNode*, GraphNode*> FileHandler::createGraph(std::vector<std::vector<int>>* grid) {
     GraphNode* head = nullptr;
@@ -101,7 +106,7 @@ GraphNode* FileHandler::place(int x, int y, GraphNode** lastInRow, GraphNode** l
 }
 
 /**
- * Take an iterable data collection and concatinate it all into a string, seperated by the delim
+ * Take an iterable data collection and concatenate it all into a string, seperated by the delim
  * @param v vector of data to be connected
  * @param delim String to be inserted between each entry of v
  * @return A string containing all values of v seperated by delim
