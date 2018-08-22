@@ -2,8 +2,7 @@
 // Created by Matthew on 3/21/2018.
 //
 
-//using namespace std;
-
+#pragma once
 #include "../graph/GraphNode.h"
 #include <vector>
 
@@ -97,3 +96,8 @@ private:
         (*grid)[yMax][xMax] = color;
     };
 };
+
+//struct Colors{
+//    static int RED = 2;
+//    static int BLUE = 3;
+//};
