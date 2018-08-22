@@ -113,13 +113,13 @@ void FileHandler::placeAndSetNeighbors(const std::vector<std::vector<int>> *grid
 GraphNode* FileHandler::place(int x, int y, GraphNode** lastInRow, GraphNode** lastInCol){
     auto* n1 = new GraphNode(x,y);
     if(*lastInRow){
-        int weight = (*lastInRow)->getCol() - n1->getCol();
+        int weight = std::abs((*lastInRow)->getCol() - n1->getCol());
         auto* e = new GraphEdge(weight);
         n1->addEdge(*lastInRow, *e);
         (*lastInRow)->addEdge(n1, *e);
     }
     if(*lastInCol){ //Can probably be refactored into its own subroutine
-        int weight = n1->getRow() - (*lastInCol)->getRow();
+        int weight = std::abs(n1->getRow() - (*lastInCol)->getRow());
         auto* e = new GraphEdge(weight);
         n1->addEdge(*lastInCol, *e);
         (*lastInCol)->addEdge(n1, *e);
