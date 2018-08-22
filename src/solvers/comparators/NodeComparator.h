@@ -9,6 +9,8 @@
 
 class NodeComparator{
 public:
-    virtual int operator() (const GraphNode* gn1, const GraphNode* gn2)= 0;
+    int operator() (const GraphNode* gn1, const GraphNode* gn2){
+        return 0;
+    };
 };
 #endif //PICTURE_MAZE_SOLVER_NODECOMPARATOR_H

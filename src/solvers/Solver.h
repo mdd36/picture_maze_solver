@@ -5,6 +5,7 @@
 #pragma once
 #include "../graph/GraphNode.h"
 #include <vector>
+#include <queue>
 
 class Solver{
 public:

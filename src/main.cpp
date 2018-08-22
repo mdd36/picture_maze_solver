@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
     FileHandler fileHandler;
     auto grid = fileHandler.readFileToGrid(fname);
     auto headAndTail = fileHandler.createGraph(&grid);
-    Solver* solver = new BFS();
+    Solver* solver = new Dijkstra();
     solver->solve(std::get<0>(headAndTail), std::get<1>(headAndTail), &grid);
     fileHandler.writeGridToFile(&grid, fname + solver->getTypeString());
     std::cout << "DONE" << std::endl;

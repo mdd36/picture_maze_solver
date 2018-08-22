@@ -2,6 +2,7 @@
 // Created by Matthew on 8/22/2018.
 //
 
+#pragma once
 #include <queue>
 #include <iostream>
 #include "Solver.h"
@@ -12,17 +13,8 @@ class Dijkstra : public Solver{
 
 public:
     void solve(GraphNode* head, GraphNode* tail, std::vector<std::vector<int>>* grid) override {
-        solve(new DijkstraComparator(), head, tail, grid);
-    }
-
-    std::string getTypeString() override {
-        return "Dijkstra";
-    }
-
-protected:
-    void solve(NodeComparator* comparator, GraphNode* head, GraphNode* tail, std::vector<std::vector<int>>* grid){
         std::cout << "Solving with Dijkstra's..." << std::endl;
-        std::priority_queue<GraphNode*, std::vector<GraphNode*>, typeof(comparator)> pq;
+        std::priority_queue<GraphNode*, std::vector<GraphNode*>, DijkstraComparator> pq;
         head->setDist(0);
         pq.push(head);
         while(!pq.empty()){
@@ -35,10 +27,14 @@ protected:
         throw std::invalid_argument("Graph has no path to tail node");
     }
 
+    std::string getTypeString() override {
+        return "Dijkstra";
+    }
+
 private:
 
     GraphNode* processTop(std::vector<std::vector<int>>* grid,
-                          std::priority_queue<GraphNode*, std::vector<GraphNode*>, NodeComparator>* pq){
+                          std::priority_queue<GraphNode*, std::vector<GraphNode*>, DijkstraComparator>* pq){
         GraphNode* top = pq->top();
         pq->pop();
         paint(grid, top);
@@ -46,7 +42,7 @@ private:
         return top;
     }
 
-    void pushNeighbors(GraphNode* top, std::priority_queue<GraphNode*, std::vector<GraphNode*>, NodeComparator>* pq){
+    void pushNeighbors(GraphNode* top, std::priority_queue<GraphNode*, std::vector<GraphNode*>, DijkstraComparator>* pq){
         for(std::pair<GraphNode*, GraphEdge> pair : top->getNeighbors()){
             GraphNode* neighbor = pair.first;
             int neighborDist = top->getDist() + top->getEdgeWith(neighbor).getWeight();
