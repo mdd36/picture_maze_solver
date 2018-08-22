@@ -2,7 +2,7 @@
 #include <tuple>
 #include <bits/ios_base.h>
 #include "io/FileHandler.h"
-#include "solvers/DFS.cpp"
+#include "solvers/BFS.cpp"
 
 int main(int argc, char** argv) {
     std::string fname = "med";
@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
     FileHandler fileHandler;
     auto grid = fileHandler.readFileToGrid(fname);
     auto headAndTail = fileHandler.createGraph(&grid);
-    Solver* solver = new DFS();
+    Solver* solver = new BFS();
     solver->solve(std::get<0>(headAndTail), std::get<1>(headAndTail), &grid);
     fileHandler.writeGridToFile(&grid, fname + solver->getTypeString());
     std::cout << "DONE" << std::endl;
