@@ -23,7 +23,10 @@ public:
         s.push(head);
         while(!s.empty()){
             GraphNode* top = processTop(grid, &s);
-            if(top == tail) return;
+            if(top == tail){
+                paintSolutionPath(grid, tail);
+                return;
+            }
         }
         throw std::invalid_argument("Graph has no path to tail node");
     }

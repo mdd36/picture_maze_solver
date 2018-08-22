@@ -9,7 +9,6 @@
 #include <vector>
 #include "../graph/GraphNode.h"
 
-typedef unsigned char unchar;
 class FileHandler {
 
 public:
