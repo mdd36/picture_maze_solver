@@ -34,6 +34,12 @@ public:
         return "DFS";
     }
 
+    /**
+     * Take the top node off the stack, paint the grid, and push its unvisited neighbors
+     * @param grid Return grid to paint
+     * @param s Queue used in the stack
+     * @return Graph node popped off the top of the queue
+     */
     GraphNode* processTop(std::vector<std::vector<int>> *grid, std::stack<GraphNode *> *s) {
         GraphNode* gn = s->top();
         s->pop();
