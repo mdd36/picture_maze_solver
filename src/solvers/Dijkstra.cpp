@@ -2,7 +2,7 @@
 // Created by Matthew on 8/22/2018.
 //
 
-#pragma once
+//#pragma once
 #include <queue>
 #include <iostream>
 #include "Solver.h"
