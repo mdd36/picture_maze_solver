@@ -12,6 +12,12 @@
 class Dijkstra : public Solver{
 
 public:
+    /**
+     * Solve with Dijkstra's
+     * @param head Starting node
+     * @param tail Ending node
+     * @param grid Grid to draw on
+     */
     void solve(GraphNode* head, GraphNode* tail, std::vector<std::vector<int>>* grid) override {
         std::cout << "Solving with Dijkstra's..." << std::endl;
         std::priority_queue<GraphNode*, std::vector<GraphNode*>, DijkstraComparator> pq;
@@ -27,6 +33,7 @@ public:
         throw std::invalid_argument("Graph has no path to tail node");
     }
 
+    //get type string
     std::string getTypeString() override {
         return "Dijkstra";
     }
