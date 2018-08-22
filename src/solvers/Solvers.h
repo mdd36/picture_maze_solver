@@ -9,5 +9,6 @@
 #include "BFS.cpp"
 #include "DFS.cpp"
 #include "Dijkstra.cpp"
+#include "AStar.cpp"
 
 #endif //PICTURE_MAZE_SOLVER_SOLVERS_H
