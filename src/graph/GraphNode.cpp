@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <limits>
 #include "GraphNode.h"
 
 GraphNode::GraphNode(int x, int y, int color){
@@ -24,6 +25,7 @@ void GraphNode::init(int x, int y, int color) {
     this->y = y;
     this->color = color;
     this->neighbors = *(new std::unordered_map<GraphNode*, GraphEdge>());
+    this->distance = std::numeric_limits<int>::max();
 }
 
 /**

@@ -2,7 +2,7 @@ from PIL import Image
 from sys import argv
 
 colors = [(0, 0, 0), (255, 255, 255), (255, 0, 0)]
-fname = argv[1] if len(argv) > 1 else "medDFS"
+fname = argv[1] if len(argv) > 1 else "medDijkstra"
 fPath = './../output/txt/{}.txt'.format(fname)
 
 with open(fPath, 'r') as file:

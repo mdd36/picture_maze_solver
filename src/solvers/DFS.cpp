@@ -5,6 +5,7 @@
 #include <stack>
 #include <vector>
 #include <tuple>
+#include <iostream>
 #include "Solver.h"
 #include "../graph/GraphNode.h"
 
