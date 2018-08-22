@@ -8,6 +8,12 @@
 
 class AStar : public Solver{
 
+    /**
+     * Solve with A*
+     * @param head Starting node in the graph
+     * @param tail Target node in the graph
+     * @param grid Grid to color
+     */
     void solve(GraphNode* head, GraphNode* tail, std::vector<std::vector<int>>* grid) override {
         std::cout << "Solving with A*..." << std::endl;
         AStarComparator comp(tail);
@@ -23,7 +29,7 @@ class AStar : public Solver{
         }
         throw std::invalid_argument("Graph has no path to tail node");
     }
-
+    // Get type sting
     std::string getTypeString() override {
         return "AStar";
     }
